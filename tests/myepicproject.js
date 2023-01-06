@@ -27,15 +27,19 @@ const main = async() => {
 
   console.log("Selfie Count", account.totalSelfies.toString())
 
-  await program.rpc.addSelfie({
+  await program.rpc.addSelfie("https://mferr.s3.amazonaws.com/testSelfie4.jpg",{
     accounts: {
       baseAccount: baseAccount.publicKey,
+      user: provider.wallet.publicKey,
     },
   });
 
   account = await program.account.baseAccount.fetch(baseAccount.publicKey);
 
   console.log("Selfie Count", account.totalSelfies.toString())
+
+  console.log('Selfie List', account.selfieList)
+
 
 }
 
